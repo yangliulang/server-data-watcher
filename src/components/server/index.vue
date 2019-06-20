@@ -1,5 +1,5 @@
 <template>
-  <div class="server-group">
+  <div :class="'server-group server-group-'+status">
     <div :class="'server-box server-box-'+status">
       <p class="server-name">{{name}}</p>
       <Server :status="status"></Server>
@@ -9,7 +9,6 @@
     <div class="server-gear"></div>
   </div>
 </template>
-
 <script>
 import Server from './server'
 export default {
@@ -34,6 +33,7 @@ export default {
 @keyframes status-error {
   0% {
     box-shadow: red 0 0 10px inset;
+    transform: rotate(0deg);
   }
   50% {
     box-shadow: red 0 0 50px inset;
@@ -53,12 +53,26 @@ export default {
     box-shadow: #e4ff63 0 0 10px inset;
   }
 }
+@keyframes serve-scale {
+  0% {
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+  }
+}
+.server-group-error {
+  animation: serve-scale 2s ease-in infinite;
+  position: relative;
+  z-index: 100;
+}
 .server-box {
   border: 1px solid #3096f6;
   padding: 5px;
   position: relative;
   border-radius: 10px;
-  box-shadow: #fff 0 0 10px inset;
+  box-shadow: rgba(255, 255, 255, 0.767) 0 0 10px inset;
   background-color: #11112b;
 }
 .server-box-error {
@@ -92,5 +106,12 @@ export default {
   background-color: #3096f6;
   position: relative;
   top: -10px;
+}
+.server-group:hover .server-box {
+  border-color: rgb(255, 255, 255);
+  cursor: pointer;
+}
+.server-group:hover .line {
+  background-color: #fff;
 }
 </style>

@@ -112,7 +112,7 @@ export default {
   margin-left: 5px;
 }
 .dot-list span.twinkle {
-  background-color: #fff;
+  background-color: yellow;
   box-shadow: #fff 0 0 5px;
 }
 .dot-list span:nth-child(6n + 1) {
