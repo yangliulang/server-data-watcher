@@ -42,7 +42,7 @@ export default {
     },
     compareLineOfCenterDot(linesCenterDotX, linePageX, line) {
       //三角形的对边高低固定
-      const triangleDuiBian = 20
+      const triangleDuiBian = 41
       //三角形底边的绝对值
       const triangleDiBian = Math.abs(linesCenterDotX - linePageX)
       //已知三角形的底边和对边，求出倾斜角度
@@ -93,6 +93,7 @@ export default {
 }
 .line {
   position: absolute;
+  top: 1px;
   height: 1px;
   width: 100%;
   left: 50%;

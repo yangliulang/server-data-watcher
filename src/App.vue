@@ -84,7 +84,7 @@ h1 span {
 .server-rec {
   display: flex;
   justify-content: space-around;
-  margin-top: 20px;
+  margin-top: 40px;
 }
 .server-rec-inner {
   margin: 0 20px;
