@@ -31,13 +31,17 @@ export default {
         dot.style.left = Math.random() * 100 + '%'
         dot.style.top = Math.random() * 100 + '%'
         dot.style.opacity = Math.random()
-        // dot.style.filter = `blur(${Math.random() * 10}px)`
       })
     }
   },
   mounted() {
+    //初次执行一次
     this.rondomDotPos()
+    //3秒后轮训轮训数据
     this.timer = setInterval(this.rondomDotPos, 3000)
+  },
+  destroyed() {
+    window.clearInterval(this.timer)
   }
 }
 </script>
