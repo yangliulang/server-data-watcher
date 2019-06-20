@@ -44,8 +44,9 @@ export default {
 
 <style>
 body {
-  background: #11112b url('./assets/bg.png') no-repeat right bottom;
+  background: #11112b url('./assets/bg1.png') no-repeat center bottom;
   background-attachment: fixed;
+  background-size: 50%;
   padding-bottom: 20px;
 }
 h1 {

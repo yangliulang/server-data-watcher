@@ -59,6 +59,7 @@ export default {
   position: relative;
   border-radius: 10px;
   box-shadow: #fff 0 0 10px inset;
+  background-color: #11112b;
 }
 .server-box-error {
   animation: status-error 2s ease-in infinite;
@@ -82,6 +83,7 @@ export default {
   border-radius: 5px;
   display: flex;
   justify-content: space-around;
+  background-color: #11112b;
 }
 .server-gear:after,
 .server-gear:before {
