@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <div>
+    <div class="page-3d">
       <div class="page-title">
         <h1>58Coin服务器集群监控</h1>
         <span :key="i" ref="dotList" v-for="i in 50"></span>
@@ -53,11 +53,34 @@ export default {
 </script>
 
 <style>
+@keyframes rotate3d {
+  0% {
+    transform: rotateY(0deg);
+  }
+  25% {
+    transform: rotateY(10deg);
+  }
+  50% {
+    transform: rotateY(0deg);
+  }
+  75% {
+    transform: rotateY(-10deg);
+  }
+  100% {
+    transform: rotateY(0deg);
+  }
+}
 body {
   background: #11112b url('./assets/bg1.png') no-repeat center bottom;
   background-attachment: fixed;
   background-size: 50%;
   padding-bottom: 20px;
+}
+.page-3d {
+  perspective: 1000;
+}
+.server-page {
+  animation: rotate3d 20s ease-in 0.1s infinite;
 }
 .page-title {
   position: relative;

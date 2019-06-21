@@ -57,12 +57,8 @@ export default {
   }
 }
 @keyframes serve-scale {
-  0% {
-  }
   50% {
-    transform: scale(1.1);
-  }
-  100% {
+    transform: scale(1.03);
   }
 }
 .server-group-error {

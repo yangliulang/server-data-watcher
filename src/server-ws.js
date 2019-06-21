@@ -8,6 +8,33 @@ export default {
         {
           name: 'ZWL',
           id: 'zwl1',
+          list: [
+            {
+              name: 'WS',
+              id: 'ws1',
+              status: 'success',
+              list: [
+                {
+                  name: '券商1',
+                  id: 'qs1',
+                  //链接线从哪些id流过来,
+                  targetParentSiblingsIds: ['ws2'],
+                  status: 'error'
+                },
+                {
+                  name: '券商2',
+                  id: 'qs2',
+                  //链接线从哪些id流过来,
+                  targetParentSiblingsIds: ['ws2'],
+                  status: 'success'
+                }
+              ]
+            }
+          ]
+        },
+        {
+          name: 'ZWL',
+          id: 'zwl1',
           //链接线从哪些id流过来,
           // targetParentSiblingsIds: ['ws2'],
           stats: 'success',
@@ -22,7 +49,7 @@ export default {
                   id: 'qs1',
                   //链接线从哪些id流过来,
                   targetParentSiblingsIds: ['ws2'],
-                  status: 'success'
+                  status: 'error'
                 },
                 {
                   name: '券商2',
