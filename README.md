@@ -1,6 +1,6 @@
 # 预览
 
-See [Configuration Reference](https://yangliulang.github.io/server-data-watcher/dist/index.html).
+查看 [点击这里查看效果](https://yangliulang.github.io/server-data-watcher/dist/index.html).
 
 ## Project setup
 
