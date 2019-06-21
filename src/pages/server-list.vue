@@ -1,9 +1,18 @@
 <template>
   <!-- name="服务器A" status="error" -->
   <div class="server-rec">
-    <div :key="server.name" class="server-rec-inner" v-for="server in serverData">
-      <div class="line line-animate" ref="line"></div>
-      <ServerBox :name="server.name" :status="server.status" style="width:100px"></ServerBox>
+    <div :key="server.id" class="server-rec-inner" v-for="server in serverData">
+      <!-- 默认指向父级 -->
+      <div class="line line-animate" ref="line" v-if="!server.hiddenLine"></div>
+      <!-- 有可能指向父级的兄弟们 -->
+      <div
+        :data-target-up="lineToUpId"
+        :key="lineToUpId"
+        class="line line-animate"
+        ref="lineToParentSiblings"
+        v-for="lineToUpId in server.targetParentSiblingsIds"
+      ></div>
+      <ServerBox :id="server.id" :name="server.name" :status="server.status" style="width:100px"></ServerBox>
       <server-list :server-data="server.list" v-if="server.list"></server-list>
     </div>
   </div>
@@ -23,22 +32,47 @@ export default {
     }
   },
   methods: {
+    //绘制默认的指向父服务器的连接线
     drawLine() {
-      this.$refs.line.forEach(line => {
-        //当前线的位置信息
-        const lineRect = line.getBoundingClientRect()
-        //获取当前线的爷爷元素的位置信息
-        const lineParentElRect = line.parentElement.parentElement.getBoundingClientRect()
-        //计算相邻多条线的中心点坐标
-        const linesCenterDotX =
-          lineParentElRect.width / 2 + lineParentElRect.left
-        //获取当前线相对于页面左边的距离
-        const linePageX = lineRect.left
-        // console.dir(lineParentElRect)
-        //用爷爷的中心点和当前线的坐标点做比较，如果小于0表示线在左边，大于0就在右边，等于0，不变
-        //然后设置旋转角度
-        this.compareLineOfCenterDot(linesCenterDotX, linePageX, line)
-      })
+      //绘制默认指向父服务器的链接线
+      this.$refs.line &&
+        this.$refs.line.forEach(line => {
+          //当前线的位置信息
+          const lineRect = line.getBoundingClientRect()
+          //获取当前线的爷爷元素的位置信息
+          const lineParentElRect = line.parentElement.parentElement.getBoundingClientRect()
+          //计算相邻多条线的中心点坐标
+          const linesCenterDotX =
+            lineParentElRect.width / 2 + lineParentElRect.left
+          //获取当前线相对于页面左边的距离
+          const linePageX = lineRect.left
+          // console.dir(lineParentElRect)
+          //用爷爷的中心点和当前线的坐标点做比较，如果小于0表示线在左边，大于0就在右边，等于0，不变
+          //然后设置旋转角度
+          this.compareLineOfCenterDot(linesCenterDotX, linePageX, line)
+        })
+      //绘制指向父服务的兄弟连接线
+      this.$refs.lineToParentSiblings &&
+        this.$refs.lineToParentSiblings.forEach(line => {
+          // console.dir(line.dataset.targetUp)
+          //父服务器的兄弟服务器的id
+          const parentServerId = line.dataset.targetUp
+          //当前线的位置信息
+          const lineRect = line.getBoundingClientRect()
+          //获取当前线的爷爷元素的位置信息
+          const lineParentElRect = document
+            .querySelector(`#${parentServerId}`)
+            .getBoundingClientRect()
+          //计算相邻多条线的中心点坐标
+          const linesCenterDotX =
+            lineParentElRect.width / 2 + lineParentElRect.left
+          //获取当前线相对于页面左边的距离
+          const linePageX = lineRect.left
+          // console.dir(lineParentElRect)
+          //用爷爷的中心点和当前线的坐标点做比较，如果小于0表示线在左边，大于0就在右边，等于0，不变
+          //然后设置旋转角度
+          this.compareLineOfCenterDot(linesCenterDotX, linePageX, line)
+        })
     },
     compareLineOfCenterDot(linesCenterDotX, linePageX, line) {
       //三角形的对边高低固定
@@ -64,6 +98,7 @@ export default {
     }
   },
   mounted() {
+    //绘制默认链接线
     this.drawLine()
   }
 }
@@ -102,6 +137,7 @@ export default {
   transform: rotate(-90deg);
   transform-origin: 0 0;
   line-height: 0;
+  color: #fff;
 }
 .line::after,
 .line::before {

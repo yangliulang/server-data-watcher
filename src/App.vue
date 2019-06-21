@@ -1,11 +1,16 @@
 <template>
   <div class="page">
-    <div class="page-title">
-      <h1>58Coin服务器集群监控</h1>
-      <span :key="i" ref="dotList" v-for="i in 50"></span>
-    </div>
-    <div class="server-page">
-      <ServerList :server-data="ServerData.server1"></ServerList>
+    <div>
+      <div class="page-title">
+        <h1>58Coin服务器集群监控</h1>
+        <span :key="i" ref="dotList" v-for="i in 50"></span>
+      </div>
+      <div class="server-page">
+        <ServerList :server-data="ServerData.serverList1"></ServerList>
+      </div>
+      <div class="server-page">
+        <ServerList :server-data="ServerData.serverList2"></ServerList>
+      </div>
     </div>
   </div>
 </template>
@@ -13,7 +18,6 @@
 <script>
 import ServerList from '@/pages/server-list'
 import ServerData from '@/server-ws'
-import { setInterval, setTimeout } from 'timers'
 export default {
   name: 'app',
   components: {
@@ -35,7 +39,6 @@ export default {
           '#' + Math.floor(Math.random() * 256).toString(10)
       })
     }
-    //title进场
   },
   mounted() {
     //初次执行一次
@@ -59,6 +62,7 @@ body {
 .page-title {
   position: relative;
   text-align: center;
+  border-top: 1px solid #113252;
   border-bottom: 1px solid #113252;
   padding: 10px;
 }
@@ -100,7 +104,7 @@ body {
   margin-top: 40px;
 }
 .server-rec-inner {
-  margin: 0 20px;
+  margin: 0 100px;
   display: flex;
   flex-direction: column;
   align-items: center;

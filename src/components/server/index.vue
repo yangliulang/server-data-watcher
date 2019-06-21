@@ -1,5 +1,5 @@
 <template>
-  <div :class="'server-group server-group-'+status">
+  <div :class="'server-group server-group-'+status" :id="id">
     <div :class="'server-box server-box-'+status">
       <p class="server-name">{{name}}</p>
       <Server :status="status"></Server>
@@ -17,6 +17,9 @@ export default {
     Server
   },
   props: {
+    id: {
+      type: String
+    },
     name: {
       type: String,
       default: '服务器'
